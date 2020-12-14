@@ -65,7 +65,7 @@ describe("BoldParagraph component", () => {
     const contactSection = result.props.children[result.props.children.length-2]
     expect(contactSection.props.children[0]).toEqual(<BoldParagraph firstWord="Phone:" theRest={<LinkTo external={true} href="tel:12345678" text="+12345678" />} />)
     expect(contactSection.props.children[1]).toEqual(<BoldParagraph firstWord="Email:" theRest={<LinkTo external={true} href="mailto:test@test.com" text="thatsme@test.com" />} />)
-    expect(contactSection.props.children[2]).toEqual(<BoldParagraph firstWord="Twitter:" theRest={<LinkTo external={true} href="#twitter" text="superfun" />} />)
+    expect(contactSection.props.children[2]).toEqual(<BoldParagraph firstWord="Twitter:" theRest={<LinkTo external={true} href="#twitter" text="#superfun" />} />)
   })
 })
 
