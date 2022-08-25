@@ -33,15 +33,7 @@ const FoodItem = ({ name, src, time, place }) => {
 }
 
 const ListItems = ({items}) => {
-    return (
-        <>
-            {items.map((item, index) => (
-                <li key={index}>
-                    {item}
-                </li>
-            ))}
-        </>
-    )
+    return items.map((item, index) => <li key={index}>{item}</li>)
 }
 
 const Section = ({name, heading, children}) => {
@@ -88,7 +80,7 @@ const App = () => {
                             />,
                             <BoldParagraph 
                             firstWord="Friendly" 
-                            theRest="web maven. Bacon lover. General internet specialist. Incurable travel scholar.."
+                            theRest="web maven. Bacon lover. General internet specialist. Incurable travel scholar."
                             />,
                             <BoldParagraph 
                             firstWord="Subtly" 
@@ -123,7 +115,7 @@ const App = () => {
                 />
                 <FoodItem 
                     name="Loaded Fries" 
-                    src="quesadilla.jpg" 
+                    src="loaded_fries.jpg" 
                     time="During the game" 
                     place="My House"
                 />
@@ -150,7 +142,7 @@ const App = () => {
                 theRest={<LinkTo 
                     external={true} 
                     href="#twitter" 
-                    text="superfun" 
+                    text="#superfun" 
                 />}
             />
           </Section>

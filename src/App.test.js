@@ -65,7 +65,7 @@ describe("BoldParagraph component", () => {
     const contactSection = result.props.children[result.props.children.length-2]
     expect(contactSection.props.children[0]).toEqual(<BoldParagraph firstWord="Phone:" theRest={<LinkTo external={true} href="tel:12345678" text="+12345678" />} />)
     expect(contactSection.props.children[1]).toEqual(<BoldParagraph firstWord="Email:" theRest={<LinkTo external={true} href="mailto:test@test.com" text="thatsme@test.com" />} />)
-    expect(contactSection.props.children[2]).toEqual(<BoldParagraph firstWord="Twitter:" theRest={<LinkTo external={true} href="#twitter" text="superfun" />} />)
+    expect(contactSection.props.children[2]).toEqual(<BoldParagraph firstWord="Twitter:" theRest={<LinkTo external={true} href="#twitter" text="#superfun" />} />)
   })
 })
 
@@ -108,7 +108,7 @@ describe("FoodItem component", () => {
     expect(pizza).toEqual(<FoodItem name="Pizza" place="Queen Margharitas" src="pizza.jpg" time="All the time" />)
     expect(quesadillas).toEqual(<FoodItem name="Quesadillas" place="Mejico" src="quesadilla.jpg" time="Afternoon Siesta" />)
     expect(icecreamPancakes).toEqual(<FoodItem name="Icecream Pancakes" place="Pancakes on the Rocks" src="icecream_pancakes.jpg" time="Brekky" />)
-    expect(loadedFries).toEqual(<FoodItem name="Loaded Fries" place="My House" src="quesadilla.jpg" time="During the game" />)
+    expect(loadedFries).toEqual(<FoodItem name="Loaded Fries" place="My House" src="loaded_fries.jpg" time="During the game" />)
   })
 })
 
@@ -146,7 +146,7 @@ describe("ListItems component should", () => {
     const listItems = sectionItems[sectionItems.length-1].props.children.props.children.props.items
     expect(listItems.length).toEqual(4)
     expect(listItems[0]).toEqual(<BoldParagraph firstWord="Pop" theRest="culture maven. Beer fan. Award-winning music junkie. Extreme coffee enthusiast. Thinker. Tv specialist." />)
-    expect(listItems[1]).toEqual(<BoldParagraph firstWord="Friendly" theRest="web maven. Bacon lover. General internet specialist. Incurable travel scholar.." />)
+    expect(listItems[1]).toEqual(<BoldParagraph firstWord="Friendly" theRest="web maven. Bacon lover. General internet specialist. Incurable travel scholar." />)
     expect(listItems[2]).toEqual(<BoldParagraph firstWord="Subtly" theRest="charming twitter lover. Social media fan. Incurable travel geek. Lifelong pop culture specialist. Tv scholar." />)
     expect(listItems[3]).toEqual(<BoldParagraph firstWord="Unable" theRest="to type with boxing gloves on. Proud bacon fan. Music junkie. Coffee ninja. Beer specialist." />)
   })
@@ -164,13 +164,21 @@ describe("Section component should", () => {
   test("render a SectionHeading component inside", () => {
     const renderer = new ShallowRenderer()
     renderer.render(<Section name="about-me" heading="This Is Me!" />);
-    const result = renderer.getRenderOutput();
-    const section = result.props.children[0]
-    expect(section).toEqual(<SectionHeading text="This Is Me!"/>)
+    let result = renderer.getRenderOutput();
+    let section = result.props.children[0]
+    expect(section).toEqual(<SectionHeading text="This Is Me!" />)
+    renderer.render(<Section name="testing" heading="Time to Test!" />);
+    result = renderer.getRenderOutput();
+    section = result.props.children[0]
+    expect(section).toEqual(<SectionHeading text="Time to Test!" />)
+
   })
   test("pass down children", () => {
-    const { getByText } = render(<Section name="about-me" heading="This Is Me!"><p>Hello World</p></Section>)
-    const paragraph = getByText("Hello World")
+    let { getByText } = render(<Section name="about-me" heading="This Is Me!"><p>Hello World</p></Section>)
+    let paragraph = getByText("Hello World")
+    expect(paragraph).toBeInTheDocument()
+    getByText = render(<Section name="testing" heading="Time to Test!"><p>Testing is fun!</p></Section>).getByText
+    paragraph = getByText("Testing is fun!")
     expect(paragraph).toBeInTheDocument()
   })
   test("be used in the <App />", () => {
@@ -182,22 +190,3 @@ describe("Section component should", () => {
     expect(result.props.children[3].type).toEqual(Section)
   })
 })
-
-
-// test('testing get roles', () => {
-//   render(<App />)
-//   const nav = document.querySelector("nav")
-//   console.log(getRoles(nav))
-// })
-
-
-// Needs improving
-// test('shallow', () => {
-//   const renderer = new ShallowRenderer()
-//   const secondRender = new ShallowRenderer()
-//   renderer.render(<App />);
-//   secondRender.render(<StarterCode />)
-//   const result = renderer.getRenderOutput();
-//   const resultTwo = secondRender.getRenderOutput()
-//   expect(result).not.toEqual(resultTwo)
-// })
